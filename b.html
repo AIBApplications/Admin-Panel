@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" id="mainHtmlDoc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./flowbite.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;            
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="w-full h-14 top-0 flex grow flex-row basis-0 dark:bg-gray-800 bg-blue-100">
+        <div class=""></div>
+        <div class=""></div>
+        <div class="flex flex-row justify-end items-center pr-5 pl-5">
+            <svg onclick="toggleDir()" class="rotate-90 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12.832 3.445a1 1 0 0 0-1.664 0l-4 6A1 1 0 0 0 8 11h8a1 1 0 0 0 .832-1.555l-4-6Zm-1.664 17.11a1 1 0 0 0 1.664 0l4-6A1 1 0 0 0 16 13H8a1 1 0 0 0-.832 1.555l4 6Z" clip-rule="evenodd"/>
+            </svg>
+            &nbsp;&nbsp;&nbsp;
+            <svg onclick="toggleTheme()" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+            </svg>             
+        </div>
+    </div>
+    <div class="w-full h-full flex flex-row basis-0">
+        <div id="sidebar" class="h-full md:w-52 w-0 overflow-hidden dark:bg-gray-800 bg-blue-100 hover:bg-sky-700">
+        </div>
+        <div class="h-full bg-white dark:bg-gray-700">
+            
+        </div>
+    </div>
+    <script src="./flowbite.min.js"></script>
+    <script>
+        const html = document.querySelector("#mainHtmlDoc");
+        const sidebar = document.querySelector("#sidebar");
+        function toggleDir () {
+            if (html.getAttribute('dir') === 'rtl') {
+                html.setAttribute('dir', 'ltr');
+                localStorage.setItem('appDir', 'ltr');
+            } else {
+                html.setAttribute('dir', 'rtl');
+                localStorage.setItem('appDir', 'rtl');
+            }
+        }
+        function toggleTheme () {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('appTheme', 'bright');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('appTheme', 'dark');
+            }
+        }
+        function setAppearance () {
+            const dir = localStorage.getItem('appDir');
+            const theme = localStorage.getItem('appTheme');
+            if (dir)
+                html.setAttribute('dir', dir);
+            if (theme && theme === 'dark')
+                html.classList.add('dark');
+        }
+        setAppearance();
+    </script>
+</body>
+</html>
